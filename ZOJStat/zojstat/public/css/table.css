@@ -1,0 +1,40 @@
+ body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#head{
+	background-color: blue;
+	color:white;
+	text-align: center;
+}
+
+.tran{
+	margin:0 auto;
+	text-align: center;
+}
+
+
+table.tran{
+	background-color: #FFFFFF;
+}
+
+table thead th {
+	background-color: #6CADD9;
+	color: #FFFFFF;
+}
+ 
+table td.chg{
+	background-color: #E6E6E6;
+	
+}
+
+table td.rt{
+	text-align: right;
+}
+
+td.tran:hover {
+	background-color: #BFEDF9;
+}
+
+ 

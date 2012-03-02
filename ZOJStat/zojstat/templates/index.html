@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:if="False"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/table.css')}"  />
+
+  <title>ZOJ stats Viewer</title>
+</head>
+
+<body>
+<div id="head">
+    <h2>ZOJ User Stats</h2>
+</div>
+
+<div id="tijiao">
+${helpers.html.tags.form("/query", method='get')}
+${helpers.html.tags.text("user")} 
+${helpers.html.tags.submit(None,value="提交")}
+ 
+</div>
+
+ 
+</body>
+</html>

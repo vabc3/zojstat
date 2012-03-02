@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:if="False"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/table.css')}"  />
+
+  <title>ZOJ stats Viewer</title>
+</head>
+
+<body>
+<div id="head">
+    <h2>ZOJ User Stats</h2>
+</div>
+
+
+<div class="tran">
+<!-- ${helpers.html.tags.image('/images/rss.png', 'rss syndication')} -->
+
+User:${user}
+Total:${count}
+</div>
+
+<div id="tab">
+    <table class="tran">
+        <thead>
+            <tr><th>Pro ID</th><th>Staus</th><th>Count</th><th>btime</th><th>eTime</th></tr>
+        </thead>
+        <tbody>
+            <tr py:for="zus in zuses">
+                <th>${zus.pid}</th>               
+                <td>${zus.status}</td>
+                <td>${zus.count}</td>
+	            <td>${zus.btime}</td>
+	            <td>${zus.etime}</td>	            
+	            
+            </tr>
+        </tbody>
+    </table>
+  </div>
+ 
+</body>
+</html>
