@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:py="http://genshi.edgewall.org/"
       xmlns:xi="http://www.w3.org/2001/XInclude">
-
+<xi:include href="tail.html" />
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:if="False"/>
   <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/table.css')}"  />
@@ -21,7 +21,7 @@
 <!-- ${helpers.html.tags.image('/images/rss.png', 'rss syndication')} -->
 
 User:${user}
-Total:${count}
+Stat:${passed}/${count}
 </div>
 
 <div id="tab">
@@ -31,16 +31,27 @@ Total:${count}
         </thead>
         <tbody>
             <tr py:for="zus in zuses">
-                <th>${zus.pid}</th>               
-                <td>${zus.status}</td>
-                <td>${zus.count}</td>
+                <th>
+					<a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=${zus.pid}">${zus.pid}</a>
+                </th>
+                <td>
+<py:choose test="zus.status">
+  <py:when test="0"><span class="ac">AC</span></py:when>
+  <py:when test="1"><span class="er">ER</span></py:when>
+</py:choose>
+                </td>
+                <td>
+               		<a href="http://acm.zju.edu.cn/onlinejudge/showRuns.do?contestId=1&amp;search=true&amp;firstId=-1&amp;lastId=-1&amp;problemCode=${zus.pid}&amp;handle=${user}&amp;idStart=&amp;idEnd=">${zus.count}</a>
+                </td>
 	            <td>${zus.btime}</td>
 	            <td>${zus.etime}</td>	            
 	            
             </tr>
         </tbody>
     </table>
-  </div>
- 
+</div>
+
+${footer()}
+<!--<p><a href="http://www.turbogears.org/2.1/">Powered by TurboGears 2</a></p>-->
 </body>
 </html>

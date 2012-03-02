@@ -9,6 +9,18 @@
 	text-align: center;
 }
 
+.ac{
+	color:red;
+}
+
+.er{
+	color:green;
+}
+
+.tai{
+	text-align: center;
+}
+
 .tran{
 	margin:0 auto;
 	text-align: center;

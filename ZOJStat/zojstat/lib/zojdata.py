@@ -31,19 +31,24 @@ class ZOJStatController(object):
 		usds 	= DBSession.query(UserStat).filter(UserStat.user==user). \
 					order_by(UserStat.sid)
 		report	= []
-		
-		dic	= dict()
+		passed	= 0
+		dic		= dict()
 		
 		for usd in usds:
 			if dic.has_key(usd.pid):
 				qt=dic[usd.pid]
-				if usd.status == 0 :
+				if usd.status == 0 and qt.status != 0:
+#					print qt.pid
 					qt.status = 0
+					passed+=1
+
 				qt.etime=usd.time
 				qt.count=qt.count+1
 				dic[usd.pid]=qt
 			else:
 				ur	= UserReport(usd.pid,usd.status,usd.time,usd.time,1)
+				if usd.status == 0:
+					passed+=1
 				dic[usd.pid]=ur
 		for p in dic.values():
 			report.append(p)
@@ -51,4 +56,4 @@ class ZOJStatController(object):
 		report.sort(lambda x,y:cmp(x.pid,y.pid))
 		
 #		print html.tags.image('/images/rss.png', 'rss syndication')
-		return dict(user=user,count=len(report),zuses=report)
+		return dict(user=user,passed=passed,count=len(report),zuses=report)

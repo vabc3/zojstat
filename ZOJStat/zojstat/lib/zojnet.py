@@ -75,7 +75,7 @@ class ZOJNet(object):
 	
 	@staticmethod
 	def querya(user,lid,startid):
-		log.debug("qa:"+str(lid))
+#		log.debug("qa:"+str(lid))
 		dat	= ZOJNet.getWeb(base1+str(lid)+base2+user+base3+str(startid))
 		pas = Parser()
 		pas.feed(dat)

@@ -8,6 +8,7 @@ from zojstat.model import DBSession, metadata
 from zojstat.lib.base import BaseController
 from zojstat.controllers.error import ErrorController
 from zojstat.lib.zojdata import ZOJStatController
+from os import environ
 
 __all__ = ['RootController']
 
@@ -21,5 +22,6 @@ class RootController(BaseController):
 		
 	@expose('zojstat.templates.query')		
 	def query(self,user):
+		print environ['REMOTEHOST']
 		ZOJStatController.updateuser(user)
 		return ZOJStatController.gaindata(user)
