@@ -22,6 +22,6 @@ class RootController(BaseController):
 		
 	@expose('zojstat.templates.query')		
 	def query(self,user):
-		print environ['REMOTEHOST']
+#		print environ['REMOTEHOST']
 		ZOJStatController.updateuser(user)
 		return ZOJStatController.gaindata(user)
