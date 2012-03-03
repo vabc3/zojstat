@@ -27,7 +27,7 @@ class ZOJStatController(object):
 
 	@staticmethod
 	def gaindata(user):
-		log.debug("Query:"+user)
+		log.info("Query:"+user)
 		usds 	= DBSession.query(UserStat).filter(UserStat.user==user). \
 					order_by(UserStat.sid)
 		report	= []
