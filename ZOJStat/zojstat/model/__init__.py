@@ -60,3 +60,4 @@ def init_model(engine):
 
 # Import your model modules here.
 from zojstat.model.userstat import *
+from zojstat.model.pinfo import *

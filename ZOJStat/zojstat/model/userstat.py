@@ -15,7 +15,7 @@ class UserStat(DeclarativeBase):
 	pid 	= Column(Integer,	nullable=False)		#问题id
 	user 	= Column(String(32),nullable=False)		#用户名
 	status	= Column(Integer,	nullable=False)		#通过与否
-	time	= Column(DateTime,	nullable=False)  	#提交时间
+	time	= Column(DateTime,	nullable=False,	default='0000-00-00 00:00:00')  	#提交时间
 	
 	def show(self):
 		print "id:",self.id,"|sid:",self.sid,"|pid:",self.pid, \

@@ -4,6 +4,7 @@
 *.o
 *.lo
 *.la
+.coverage
 auto*
 configure
 Makefile
