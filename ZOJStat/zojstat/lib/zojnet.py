@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""maitian data"""
+"""NET data"""
 
 import urllib
 import logging
@@ -7,6 +7,8 @@ import re
 from sgmllib import SGMLParser
 from zojstat.model import SubmissionInfo
 #from zojstat.lib.app_globals import Globals
+
+__all__	= ['query']
 
 log 	= logging.getLogger(__name__)
 base1	= "http://acm.zju.edu.cn/onlinejudge/showRuns.do?contestId=1&search=true&firstId=-1&lastId="
@@ -59,41 +61,39 @@ class Parser(SGMLParser):
 		elif self.td=="runProblemId"	 :
 			self.us.pid		= text
        
-class ZOJNet(object):
-	@staticmethod
-	def getWeb(url):
-		f = urllib.urlopen(url)
-		data = f.read()
-		f.close()
-		return data
-	
-	@staticmethod
-	def querya(user,lid,startid):
-#		log.debug("qa:"+str(lid))
-		dat	= ZOJNet.getWeb(base1+str(lid)+base2+user+base3+str(startid))
-		pas = Parser()
-		pas.feed(dat)
-		col	= pas.coll
-		if(len(col)>0):
-			col.reverse()
-			col.pop()
-			col.reverse()
-		
-		return (pas.ne,col)
-		
-	@staticmethod
-	def query(user,startid):
-		log.debug("NetQ:"+user)
-		
-		(pos,col)=ZOJNet.querya(user,-1,startid)
-		cot=col
-		while pos!=-1 :
-			(pos,col)=ZOJNet.querya(user,pos,startid)
-			cot.extend(col)
-		for pt in cot:
-			pt.user=user
-		log.debug("Total:"+str(len(cot)))
-		return cot
-		
-		
+def getWeb(url):
+	f = urllib.urlopen(url)
+	data = f.read()
+	f.close()
+	return data
 
+def querya(user,lid,startid):
+#		log.debug("qa:"+str(lid))
+	dat	= getWeb(base1+str(lid)+base2+user+base3+str(startid))
+	pas = Parser()
+	pas.feed(dat)
+	col	= pas.coll
+	if(len(col)>0):
+		col.reverse()
+		col.pop()
+		col.reverse()
+	for ea in col:
+		ea.sid=int(ea.sid)
+		ea.pid=int(ea.pid)
+	return (pas.ne,col)
+	
+def query(user,startid,cb):
+	log.debug("NetQ:"+user)
+	
+	(pos,col)=querya(user,-1,startid)
+	for pt in col:
+		pt.user=user
+	cb(col)
+
+	while pos!=-1 :
+		(pos,col)=querya(user,pos,startid)
+		for pt in col:
+			pt.user=user
+		cb(col)
+
+		

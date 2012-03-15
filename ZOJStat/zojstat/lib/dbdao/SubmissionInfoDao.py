@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-from zojstat.model import DBSession
-from zojstat.model import SubmissionInfo
+from zojstat.model import DBSession,SubmissionInfo
+from zojstat import model
+import transaction
+import traceback,sys
+from zope.sqlalchemy.datamanager import mark_changed 
+
 
 def getmaxsid(user):
 	que=DBSession.query(SubmissionInfo).filter(SubmissionInfo.user==user). \
@@ -10,13 +14,17 @@ def getmaxsid(user):
 		rt	= que.sid
 	return rt;
 	
+def _savesinfo(data):
+    t	= SubmissionInfo.__table__.insert(data.__dict__) \
+    		.prefix_with("ignore")
+    w=DBSession.connection().execute(t)
+	
 def savesinfo(data):
-    try:
-    	t=SubmissionInfo.__table__.insert(data.__dict__)
-    	t=t.prefix_with("ignore")
-    	DBSession.execute(t)
-        DBSession.flush()
-    except Exception:
-        print 'exc'
-        DBSession.rollback()
-    
+    if type(data)==list:
+	    for item in data:
+	    	_savesinfo(item)
+    else:
+        _savesinfo(data)
+    mark_changed(DBSession())
+	
+   

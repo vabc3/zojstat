@@ -21,4 +21,4 @@ class SubmissionInfo(DeclarativeBase):
     def __repr__(self):
         return "<SubmissionInfo id=%d sid=%d pid=%d " \
                 "user=%s status=%s time=%s>" % \
-        (self.id,self.sid,self.pid,self.user,self.status,self.time)
+        (self.id if(self.id) else -1,self.sid,self.pid,self.user,self.status,self.time)

@@ -52,7 +52,7 @@ class TestController(object):
                           relative_to=conf_dir)
         self.app = TestApp(wsgiapp)
         # Setting it up:
-#        test_file = path.join(conf_dir, 'test.ini')
+        test_file = path.join(conf_dir, 'test.ini')
 #        cmd = SetupCommand('setup-app')
 #        cmd.run([test_file])
     

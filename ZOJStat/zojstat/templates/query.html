@@ -27,7 +27,8 @@ Stat:${passed}/${count}
 <div id="tab">
     <table class="tran">
         <thead>
-            <tr><th>Pro ID</th><th>Staus</th><th>Count</th><th>btime</th><th>eTime</th></tr>
+            <tr><th>Pro ID</th><th>Staus</th><th>Count</th>
+            <th>btime</th><th>eTime</th><th>Duration</th></tr>
         </thead>
         <tbody>
             <tr py:for="zus in zuses">
@@ -35,9 +36,10 @@ Stat:${passed}/${count}
 					<a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=${zus.pid}">${zus.pid}</a>
                 </th>
                 <td>
-<py:choose test="zus.status">
-  <py:when test="0"><span class="ac">AC</span></py:when>
-  <py:when test="1"><span class="er">ER</span></py:when>
+                	
+<py:choose test="zus.ac">
+  <py:when test="1"><span class="ac">${zus.status}</span></py:when>
+  <py:when test="0"><span class="er">${zus.status}</span></py:when>
 </py:choose>
                 </td>
                 <td>
@@ -45,7 +47,7 @@ Stat:${passed}/${count}
                 </td>
 	            <td>${zus.btime}</td>
 	            <td>${zus.etime}</td>	            
-	            
+	            <td>${zus.duration}</td>
             </tr>
         </tbody>
     </table>

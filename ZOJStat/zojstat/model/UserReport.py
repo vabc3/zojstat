@@ -6,6 +6,8 @@ class UserReport(object):
 	etime	= ''
 	btime	= '' 
 	count	= 0
+	ac		= False
+	duration	= 'x'
 	
 	def __init__(self,pid,status,btime,etime,count):
 		self.pid	= pid
