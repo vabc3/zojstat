@@ -3,14 +3,12 @@
 
 from os import path
 import sys
-
 from tg import config
 from paste.deploy import loadapp
 from paste.script.appinstall import SetupCommand
 from routes import url_for
 from webtest import TestApp
 from nose.tools import eq_
-
 from zojstat import model
 
 __all__ = ['setup_db', 'teardown_db', 'TestController', 'url_for']
@@ -18,13 +16,13 @@ __all__ = ['setup_db', 'teardown_db', 'TestController', 'url_for']
 def setup_db():
     """Method used to build a database"""
     engine = config['pylons.app_globals'].sa_engine 
-    model.init_model(engine)
-    model.metadata.create_all(engine)
+#   model.init_model(engine)
+#   model.metadata.create_all(engine)
 
 def teardown_db():
     """Method used to destroy a database"""
     engine = config['pylons.app_globals'].sa_engine
-    model.metadata.drop_all(engine)
+#   model.metadata.drop_all(engine)
 
 
 class TestController(object):
@@ -54,9 +52,9 @@ class TestController(object):
                           relative_to=conf_dir)
         self.app = TestApp(wsgiapp)
         # Setting it up:
-        test_file = path.join(conf_dir, 'test.ini')
-        cmd = SetupCommand('setup-app')
-        cmd.run([test_file])
+#        test_file = path.join(conf_dir, 'test.ini')
+#        cmd = SetupCommand('setup-app')
+#        cmd.run([test_file])
     
     def tearDown(self):
         """Method called by nose after running each test"""

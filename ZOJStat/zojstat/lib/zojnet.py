@@ -5,15 +5,13 @@ import urllib
 import logging
 import re
 from sgmllib import SGMLParser
-from zojstat.model.userstat import UserStat
-
+from zojstat.model import SubmissionInfo
 #from zojstat.lib.app_globals import Globals
 
 log 	= logging.getLogger(__name__)
 base1	= "http://acm.zju.edu.cn/onlinejudge/showRuns.do?contestId=1&search=true&firstId=-1&lastId="
 base2	= "&problemCode=&handle="
 base3	= "&idStart="
-ac		= re.compile(r"Accept")
 nex		= re.compile(".*Next\((\d*)\).*")
 
 class Parser(SGMLParser):
@@ -21,7 +19,6 @@ class Parser(SGMLParser):
 	a		= 0
 	coll	= []  
 	us		= None
-
 	ne		= -1
 	
 	def __init__(self):
@@ -51,17 +48,14 @@ class Parser(SGMLParser):
 		if self.td==0 :					
 			pass
 		elif self.td=="runId" :
-			self.us		= UserStat()
+			self.us		= SubmissionInfo()
 			self.us.sid	= text
 		elif self.td=="runUserName" :
 			self.coll.append(self.us)
 		elif self.td=="runSubmitTime" :
 			self.us.time	= text
 		elif self.td=="runJudgeStatus" :
-			if re.search(ac,text):
-				self.us.status	= 0
-			else:
-				self.us.status	= 1
+			self.us.status	= " ".join(text.split())
 		elif self.td=="runProblemId"	 :
 			self.us.pid		= text
        

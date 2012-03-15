@@ -7,7 +7,7 @@ from zojstat import model
 from zojstat.model import DBSession, metadata
 from zojstat.lib.base import BaseController
 from zojstat.controllers.error import ErrorController
-from zojstat.lib.zojdata import ZOJStatController
+from zojstat.lib.zojdata import updateuser, gaindata
 import logging
 
 __all__ = ['RootController']
@@ -23,6 +23,9 @@ class RootController(BaseController):
 		
 	@expose('zojstat.templates.query')		
 	def query(self,user):
-		logger.info(request.remote_addr+" Q:user");
-		ZOJStatController.updateuser(user)
-		return ZOJStatController.gaindata(user)
+		rem='?'
+		if request.remote_addr != None:
+			rem = request.remote_addr
+		logger.info(rem+" Q:user");
+		updateuser(user)
+		return gaindata(user)

@@ -5,7 +5,6 @@ from zope.sqlalchemy import ZopeTransactionExtension
 from sqlalchemy.orm import scoped_session, sessionmaker
 #from sqlalchemy import MetaData
 from sqlalchemy.ext.declarative import declarative_base
-
 # Global session manager: DBSession() returns the Thread-local
 # session object appropriate for the current web request.
 maker = sessionmaker(autoflush=True, autocommit=False,
@@ -39,8 +38,9 @@ metadata = DeclarativeBase.metadata
 ######
 
 def init_model(engine):
-    """Call me before using any of the tables or classes in the model."""
-    DBSession.configure(bind=engine)
+	"""Call me before using any of the tables or classes in the model."""
+	print '[w]'
+	DBSession.configure(bind=engine)
     # If you are using reflection to introspect your database and create
     # table objects for you, your tables must be defined and mapped inside
     # the init_model function, so that the engine is available if you
@@ -56,8 +56,11 @@ def init_model(engine):
     #    autoload=True, autoload_with=engine)
 
     #mapper(Reflected, t_reflected)
-
+#	t_reflected = Table("Reflected", metadata, \
+#		autoload=True, autoload_with=engine)
+#	mapper(Pinfo,t_reflected)
 
 # Import your model modules here.
-from zojstat.model.userstat import *
-from zojstat.model.pinfo import *
+from zojstat.model.SubmissionInfo import SubmissionInfo
+from zojstat.model.ProblemInfo import ProblemInfo
+from zojstat.model.UserReport import UserReport

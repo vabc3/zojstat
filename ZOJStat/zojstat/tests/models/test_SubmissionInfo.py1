@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+"测试提交信息模型"
+from nose.tools import eq_, raises
+from zojstat import model
+from zojstat.tests.models import ModelTest
+from zojstat.model import DBSession
+from sqlalchemy.exc import IntegrityError
+
+class TestSubmissionInfo(ModelTest):
+    "Submission Model"
+    klass	= model.SubmissionInfo
+    attrs	= dict(
+    			sid = 1334,
+                pid = 133,
+                status ='Hi',
+                user  ='w')
+
+    @raises(IntegrityError)
+    def test_d_insertsame(self):
+        "直接插入同样的sid导致冲突"
+        b	= dict(
+    			sid = 1334,
+                pid = 133,
+                status ='Hi',
+                user  ='w')
+        new_attrs={}
+        new_attrs.update(b)
+        oj = self.klass(**new_attrs)
+        DBSession.add(oj)
+        DBSession.flush()

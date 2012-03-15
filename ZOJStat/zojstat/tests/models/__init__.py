@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Unit test suite for the models of the application."""
 from nose.tools import assert_equals
-
 from zojstat.model import DBSession
 from zojstat.tests import setup_db, teardown_db
 
@@ -10,6 +9,7 @@ __all__ = ['ModelTest']
 # Create an empty database before we start our tests for this module
 def setup():
     """Function called by nose on module load"""
+#    print 'S in mod init\n\n\n'
     setup_db()
 
 # Tear down that database

@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+"测试提交信息模型"
+from nose.tools import eq_
+from zojstat.lib.dbdao.SubmissionInfoDao import savesinfo as save,getmaxsid
+from zojstat.model import DBSession, SubmissionInfo
+
+class TestDBDao(object):
+    "Test for dbdao"
+   
+    def test_1_insert_same(self):
+        "通过封装后的插入同sid对象不应报错"
+        a = dict(
+    			sid = 1334,
+                pid = 133,
+                status ='Hi',
+                user  ='w')
+        b = SubmissionInfo(**a)
+        save(b)
+        c = SubmissionInfo(**a)
+        c.sid=1334
+        save(c)
+        obj = DBSession.query(SubmissionInfo).one()
+
+    def test_2_get_ma1x(self):
+        "最大sid"
+        a = dict(
+    			sid = 9334,
+                pid = 133,
+                status ='Hi',
+                user  ='w')
+        b = SubmissionInfo(**a)        
+        save(b) 
+        g=getmaxsid('w')
+        eq_(g,9334)
+		
