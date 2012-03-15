@@ -11,7 +11,7 @@ class TestRootController(TestController):
         # You can look for specific strings:
         assert_true(msg in response)
         
-    def test_index(self):
+    def test_query(self):
         """Query Page"""
         response = self.app.get('/query?user=cciv79')
         response = self.app.get('/query?user=vabc3')

@@ -15,7 +15,6 @@ def savesinfo(data):
     	t=SubmissionInfo.__table__.insert(data.__dict__)
     	t=t.prefix_with("ignore")
     	DBSession.execute(t)
-#        DBSession.add(data)
         DBSession.flush()
     except Exception:
         print 'exc'
