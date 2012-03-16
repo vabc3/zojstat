@@ -63,4 +63,4 @@ def init_model(engine):
 # Import your model modules here.
 from zojstat.model.SubmissionInfo import SubmissionInfo
 from zojstat.model.ProblemInfo import ProblemInfo
-from zojstat.model.UserReport import UserReport
+from zojstat.model.ReportInfo import ReportInfo
