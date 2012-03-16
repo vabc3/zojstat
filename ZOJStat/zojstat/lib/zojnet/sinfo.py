@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """NET data"""
-
-import urllib
+ 
 import logging
 import re
+from zojstat.lib.zojnet import *
 from sgmllib import SGMLParser
 from zojstat.model import SubmissionInfo
 #from zojstat.lib.app_globals import Globals
@@ -15,6 +15,7 @@ base1	= "http://acm.zju.edu.cn/onlinejudge/showRuns.do?contestId=1&search=true&f
 base2	= "&problemCode=&handle="
 base3	= "&idStart="
 nex		= re.compile(".*Next\((\d*)\).*")
+ 
 
 class Parser(SGMLParser):
 	td		= 0
@@ -61,12 +62,6 @@ class Parser(SGMLParser):
 		elif self.td=="runProblemId"	 :
 			self.us.pid		= text
        
-def getWeb(url):
-	f = urllib.urlopen(url)
-	data = f.read()
-	f.close()
-	return data
-
 def querya(user,lid,startid):
 #		log.debug("qa:"+str(lid))
 	dat	= getWeb(base1+str(lid)+base2+user+base3+str(startid))
@@ -95,5 +90,3 @@ def query(user,startid,cb):
 		for pt in col:
 			pt.user=user
 		cb(col)
-
-		

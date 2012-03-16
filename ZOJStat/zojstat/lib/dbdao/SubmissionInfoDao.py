@@ -4,7 +4,14 @@ from zojstat import model
 import transaction
 import traceback,sys
 from zope.sqlalchemy.datamanager import mark_changed 
+from sqlalchemy import func
 
+def getmaxpid():
+	que=DBSession.query(func.max(SubmissionInfo.pid))
+	rt	= 0
+	if que.scalar() != None :
+		rt	= que.scalar()
+	return rt;
 
 def getmaxsid(user):
 	que=DBSession.query(SubmissionInfo).filter(SubmissionInfo.user==user). \

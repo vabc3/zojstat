@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+"测试提交信息模型"
+from nose.tools import eq_
+from zojstat.lib.dbdao.ProblemInfoDao import *
+
+
+def test_1_getmax():
+    "查最大的"
+#    print getmaxpid()
+#    print getmaxvid()
+        
+        
+def test_2_sav():
+	"插入看看"
+	a=ProblemInfo()
+	a.pid=99244
+	a.cata=9532
+	a.title="df"
+	savepinfo(a)
+	eq_(getmaxpid(),99244)
+	eq_(getmaxvid(),9532)

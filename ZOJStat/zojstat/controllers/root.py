@@ -25,10 +25,12 @@ class RootController(BaseController):
 	@expose('zojstat.templates.query')		
 	def query(self,user):
 		"Query Page"
+		a=ptime()
 		rem=request.remote_addr
 		if rem== None:
 			rem = '?'
 		logger.info(rem+" Q:user");
-		f=updateuser(user)
+		updateuser(user)
+		f=gaindata(user)
 		f['ptime']=str(a.gap())
 		return f
