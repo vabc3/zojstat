@@ -8,6 +8,7 @@ from zojstat.model import DBSession, metadata
 from zojstat.lib.base import BaseController
 from zojstat.controllers.error import ErrorController
 from zojstat.lib.zojdata import ZOJStatController
+from zojstat.lib.ptime import ptime
 import logging
 
 __all__ = ['RootController']
@@ -19,10 +20,14 @@ class RootController(BaseController):
 	@expose('zojstat.templates.index')
 	def index(self):
 		"""Main page."""
-		return dict()
+		a=ptime()
+		return dict(ptime=a.gap())
 		
 	@expose('zojstat.templates.query')		
 	def query(self,user):
+		a=ptime()
 		logger.info(request.remote_addr+" Q:user");
 		ZOJStatController.updateuser(user)
-		return ZOJStatController.gaindata(user)
+		f=ZOJStatController.gaindata(user)
+		f['ptime']=str(a.gap())
+		return f
