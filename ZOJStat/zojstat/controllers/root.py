@@ -8,6 +8,7 @@ from zojstat.lib.base import BaseController
 from zojstat.controllers.error import ErrorController
 from zojstat.lib.zojdata import updateuser, gaindata
 from logging import getLogger
+from zojstat.lib.ptime import ptime
 
 __all__ = ['RootController']
 logger 	= getLogger(__name__)
@@ -18,7 +19,8 @@ class RootController(BaseController):
 	@expose('zojstat.templates.index')
 	def index(self):
 		"""Main page."""
-		return dict(time='2')
+		a=ptime()
+		return dict(ptime=a.gap())
 		
 	@expose('zojstat.templates.query')		
 	def query(self,user):
@@ -27,5 +29,6 @@ class RootController(BaseController):
 		if rem== None:
 			rem = '?'
 		logger.info(rem+" Q:user");
-		updateuser(user)
-		return gaindata(user)
+		f=updateuser(user)
+		f['ptime']=str(a.gap())
+		return f

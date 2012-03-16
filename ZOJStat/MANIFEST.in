@@ -1,0 +1,4 @@
+recursive-include zojstat/public *
+include zojstat/public/favicon.ico
+recursive-include zojstat/i18n *
+recursive-include zojstat/templates *
