@@ -18,7 +18,7 @@ class RootController(BaseController):
 	@expose('zojstat.templates.index')
 	def index(self):
 		"""Main page."""
-		return dict()
+		return dict(time='2')
 		
 	@expose('zojstat.templates.query')		
 	def query(self,user):
