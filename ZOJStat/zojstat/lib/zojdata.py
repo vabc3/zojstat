@@ -19,7 +19,7 @@ ttable	= {'Accepted'				: 'AC',
 			'Memory Limit Exceeded'	: 'MLE',
 			'Output Limit Exceeded'	: 'OLE',
 			'Non-zero Exit Code'		: 'NEC',
-			'Compile Error'			: 'CE',
+			'Compilation Error'		: 'CE',
 			'Segmentation Fault'	: 'SF',
 			'u'						: '??',
 			}
