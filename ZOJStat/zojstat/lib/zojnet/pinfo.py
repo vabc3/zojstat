@@ -45,7 +45,7 @@ def getvol(vid):
     pas = Parser()
     pas.feed(dat)
     col	= pas.coll
-    print col
+#    print col
     if(len(col)>0):
         col.reverse()
         col.pop()
