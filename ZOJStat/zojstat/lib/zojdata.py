@@ -40,17 +40,24 @@ def gaindata(user):
     res 	= DBSession.query(ReportInfo).filter(ReportInfo.user==user)	\
 				.order_by(ReportInfo.pid)
     report=[]
+    passed=0
     for b in res:
         p=copy.copy(b)
         p.duration=(p.etime-p.btime).__str__()
+        if p.ac==1:
+        	p.status='Accepted'
+        	passed+=1
+        
         if ttable.has_key(p.status):
             p.status=ttable[p.status]
         else:
             p.status=ttable['u']
+
         if(p.status=='AC'):
             p.ac=True
         else:
             p.ac=False
+
     	report.append(p)
-    passed =1
+    	
     return dict(user=user,passed=passed,count=len(report),zuses=report)

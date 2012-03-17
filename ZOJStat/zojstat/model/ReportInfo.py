@@ -11,14 +11,14 @@ class ReportInfo(DeclarativeBase):
     __tablename__ = 'rinfo'
 
     pid		= Column(Integer, primary_key=True)		#数据库id
+    cata	= Column(Integer, nullable=False)	#分类
     user 	= Column(String(32), nullable=False)	#用户名
     title 	= Column(String(64), nullable=False)	#题名
-    cata	= Column(Integer, nullable=False)	#分类
     status  = Column(String(64), nullable=False)
     count	= Column(Integer, nullable=False)
     btime	= Column(DateTime, nullable=False)
     etime	= Column(DateTime, nullable=False)
-#	ac		=
+    ac		= Column(Integer, nullable=False)
 	
     def __repr__(self):
         return "<Pinfo pid='%s' title='%s' cata='%s'>" % \
